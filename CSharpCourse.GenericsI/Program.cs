@@ -11,7 +11,7 @@ namespace CSharpCourse.GenericsI
     {
         //NOTE: To reuse code, in this project there add the project CSharpCourse.ClassInterfacesAndStructs
         static void Main(string[] args)
-        {
+        {            
             Library<IVideoMedia> videoLibrary = new Library<IVideoMedia>();
 
             VHSVideo jurasicPark = new VHSVideo(TimeSpan.FromMinutes(80));

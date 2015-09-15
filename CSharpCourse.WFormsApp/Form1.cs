@@ -26,7 +26,7 @@ namespace CSharpCourse.WFormsApp
         private void buttonFillGrid_Click(object sender, EventArgs e)
         {
             List<Media> myLibrary = new List<Media>();
-
+            
             myLibrary.Add(new CasetteMedia(TimeSpan.FromMinutes(73)) { Name = "Rock 80", Tracks = 13, ArtistName = "V.A" });
             myLibrary.Add(new CasetteMedia(TimeSpan.FromMinutes(71)) { Name = "Rock 90", Tracks = 13, ArtistName = "V.A" });
             myLibrary.Add(new GenesisGame() { Name = "Sonic 1", Stages = 15 });
@@ -34,6 +34,8 @@ namespace CSharpCourse.WFormsApp
 
             dataGridViewMedia.DataSource = myLibrary;
 
+            List<string> strings = new List<string>();
+                        
             //Why no try, change myLibrary generic Type, for IVideoGame or ISoundMedia and see what happens...
         }
     }

@@ -48,9 +48,9 @@ namespace CSharpCourse.Collections
             collection.Add(1, new VHSVideo(TimeSpan.FromMinutes(53)));
             collection.Add(2, new CasetteMedia());
             collection.Add(3, new GenesisGame());
-
+            
             //Ups...
-            collection.Add(1, new BetaVideo(TimeSpan.FromMinutes(63)));
+            collection.Add(1, new BetaVideo(TimeSpan.FromMinutes(63)));            
         }
 
         private static void QueueOfGenesisGames()

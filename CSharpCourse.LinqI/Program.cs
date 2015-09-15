@@ -12,7 +12,7 @@ namespace CSharpCourse.LinqI
         static void Main(string[] args)
         {
             List<VHSVideo> myVideoLibrary = GetMyVideoLibrary();
-
+            
             var actionMovies = myVideoLibrary.Where(x => x.Genre == VideoGenre.Action);
 
             //Instead of
@@ -28,7 +28,7 @@ namespace CSharpCourse.LinqI
             }
 
             //Select allows convert collection in another one. 
-            //For sample, Director Cuts include 10 minutes more of duration we include with select.
+            //For sample, Director Cuts include 10 minutes more of duration we include with select.                        
             var directorCutsMovies = myVideoLibrary.Select(x => x.Duration.Add(TimeSpan.FromMinutes(10)));
 
             //Instead of
@@ -71,6 +71,8 @@ namespace CSharpCourse.LinqI
                 }
             }
 
+            myVideoLibrary.Skip(5).Take(5).OrderBy(x => x.DirectorName).ToList();
+                        
             Console.ReadKey();
         }
 

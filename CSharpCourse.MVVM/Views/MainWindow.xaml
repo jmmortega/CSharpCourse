@@ -1,0 +1,27 @@
+﻿<Window x:Class="CSharpCourse.MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Name}"/>            
+        </StackPanel>
+
+        <ListBox ItemsSource="{Binding Drinks}" Margin="100,75,32,34">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Price}"/>
+                        <Button Content="Buy"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+            <Button Command="{Binding CommandChangeName}" Height="30" Width="75" Content="Change name"/>
+            <Button Command="{Binding CommandRefreshDrinks}" Height="30" Width="75" Content="Refresh drinks" Margin="8,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
