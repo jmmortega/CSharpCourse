@@ -18,7 +18,7 @@ namespace CSharpCourse.MVVM.ViewModel
         public string Name
         {
             get { return _name; }
-            set { _name = value; RaisePropertyChanged("Value"); }
+            set { _name = value; RaisePropertyChanged("Name"); }
         }
 
         private List<Drink> _drinks;
@@ -60,7 +60,7 @@ namespace CSharpCourse.MVVM.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    _drinks = _drinkService.CreateDrinks();
+                    Drinks = _drinkService.CreateDrinks();
                 });
             }
         }

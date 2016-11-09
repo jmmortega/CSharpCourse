@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,10 +24,10 @@ namespace CSharpCourse.Concurrency
         private EventCallReturnString _callReturn;
 
         public Form1()
-        {
+        {            
             InitializeComponent();
 
-            _callReturn = new EventCallReturnString(ChangeLabel);
+            _callReturn = new EventCallReturnString(ChangeLabel);            
         }
 
         private void ChangeLabel(string labelValue)
@@ -46,8 +47,9 @@ namespace CSharpCourse.Concurrency
             new Thread(() =>
             {
                 _ticks = System.Environment.TickCount;
-                _drinks = _drinks.Select(x => new Drink() { Name = x.Name, Price = x.Price + 0.1 }).ToList();
-                labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();
+                _drinks = _drinks.Select(x => new Drink() { Name = x.Name, Price = x.Price + 0.1 }).ToList();                
+                this.Invoke(new EventCallReturnString(ChangeLabel), TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString());
+                //labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();
             }).Start();
         }
 
@@ -57,7 +59,8 @@ namespace CSharpCourse.Concurrency
             {
                 _ticks = System.Environment.TickCount;
                 _drinks = _drinks.Select(x => new Drink() { Name = x.Name, Price = x.Price + 0.1 }).ToList();
-                labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();                                
+                this.Invoke(new EventCallReturnString(ChangeLabel), TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString());
+                //labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();                                
             }).Start();
         }
 
@@ -66,8 +69,10 @@ namespace CSharpCourse.Concurrency
             new Task(() =>
             {
                 _ticks = System.Environment.TickCount;
-                _drinks = _drinks.AsParallel().Select(x => new Drink() { Name = x.Name, Price = x.Price + 0.1 }).ToList();
-                labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();
+                //_drinks = _drinks.AsParallel().Select(x => new Drink() { Name = x.Name, Price = x.Price + 0.1 }).ToList();
+                _drinks = _drinks.AsParallel().Select(x => new Drink() { Name = x.Name, Price = x.Price + Math.Sqrt(0.1) }).ToList();
+                this.Invoke(new EventCallReturnString(ChangeLabel), TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString());
+                //labelTime.Text = TimeSpan.FromTicks(System.Environment.TickCount - _ticks).TotalSeconds.ToString();
             }).Start();
         }
 
@@ -85,7 +90,10 @@ namespace CSharpCourse.Concurrency
             labelListCreated.Text = "Created";
         }
 
-     
-      
+        public async Task<string> CreateTaskFuture()
+        {
+            Thread.Sleep(1000);
+            return "Hello world";
+        }              
     }
 }

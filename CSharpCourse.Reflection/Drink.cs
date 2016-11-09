@@ -16,7 +16,7 @@ namespace CSharpCourse.Reflection
 
         }
 
-        public void GetADrink()
+        private void GetADrink()
         {
             Console.WriteLine("Full glass");
         }
